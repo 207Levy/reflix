@@ -5,11 +5,11 @@ import Movies from "./Movies";
 class Catalog extends Component {
   render() {
     return (
-      <div>
-        <div id="movies-container">
-          <Movies movies={this.props.state.movies} />
-        </div>
-      </div>
+      <Movies
+        rentOrReturn={this.props.rentOrReturn}
+        movies={this.props.state.movies}
+        user={this.props.state.loggedOn}
+      />
     );
   }
 }

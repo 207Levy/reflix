@@ -13,7 +13,6 @@ class App extends Component {
       movies: [
         {
           id: 0,
-          isRented: false,
           title: "Tarzan",
           year: 1999,
           img: "https://vignette.wikia.nocookie.net/disney-fan-fiction/images/4/42/Tarzan_2004_cover.jpg/revision/latest?cb=20140331030811",
@@ -22,7 +21,6 @@ class App extends Component {
         },
         {
           id: 1,
-          isRented: false,
           title: "The Lion King",
           img: "https://img00.deviantart.net/b782/i/2006/207/e/7/the_lion_king_front_cd_cover_by_peachpocket285.jpg",
           year: 1994,
@@ -31,7 +29,6 @@ class App extends Component {
         },
         {
           id: 2,
-          isRented: false,
           title: "Beauty and the Beast",
           year: 1991,
           img: "https://images-na.ssl-images-amazon.com/images/I/81etFyb9N-L._SL1500_.jpg",
@@ -40,7 +37,6 @@ class App extends Component {
         },
         {
           id: 3,
-          isRented: false,
           title: "The Sword in the Stone",
           year: 1963,
           img: "https://www.disneyinfo.nl/images/laserdiscs/229-1-AS-front.jpg",
@@ -49,7 +45,6 @@ class App extends Component {
         },
         {
           id: 4,
-          isRented: false,
           title: "Beauty and the Beast",
           year: 2016,
           img: "https://images-na.ssl-images-amazon.com/images/I/51ArFYSFGJL.jpg",
@@ -58,12 +53,45 @@ class App extends Component {
         },
       ],
       users: [
-        { name: "Or", budget: 1000, moviesPossesed: [0, 2] },
-        { name: "Raz", budget: 1000, moviesPossesed: [4] },
+        { name: "Or", budget: 1000, moviesPossesed: [] },
+        { name: "Raz", budget: 1000, moviesPossesed: [] },
         { name: "Gal", budget: 1000, moviesPossesed: [1, 3] },
       ],
+      loggedOn: null,
     };
   }
+
+  addNewUser = () => {};
+  logIn = (user) => {
+    this.setState({ loggedOn: user });
+  };
+
+  logOut = () => {
+    this.setState({ loggedOn: null });
+  };
+  rentOrReturnMovie = (userName, movieId) => {
+    movieId = Number.parseInt(movieId);
+    const usersDup = this.state.users.map((user) => {
+      return { ...user };
+    });
+    const user = usersDup.find((u) => u.name === userName);
+    if (user.moviesPossesed.includes(movieId)) {
+      user.budget += 3;
+      user.moviesPossesed = user.moviesPossesed.filter(
+        (mId) => mId !== movieId
+      );
+    } else {
+      if (user.budget < 3) {
+        alert(
+          `${userName} have balance of${user.budget}$.\nPlease return some movies to rent new ones...`
+        );
+        return;
+      }
+      user.budget -= 3;
+      user.moviesPossesed.push(movieId);
+    }
+    this.setState({ users: usersDup, loggedOn: user });
+  };
 
   render() {
     const state = this.state;
@@ -80,17 +108,32 @@ class App extends Component {
           </div>
 
           {/* Routes go here v */}
-          <Route exact path="/" render={() => <Home users={state.users} />} />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                state={state}
+                logIn={this.logIn}
+                logOut={this.logOut}
+                addNewUser={this.addNewUser}
+              />
+            )}
+          />
           <Route
             exact
             path="/catalog"
-            render={() => <Catalog state={state} />}
+            render={() => (
+              <Catalog rentOrReturn={this.rentOrReturnMovie} state={state} />
+            )}
           />
           <Route
             path="/movies/:movieId"
             exact
             render={({ match }) => (
               <Movie
+                user={this.state.loggedOn}
+                rentOrReturn={this.rentOrReturnMovie}
                 onlyPic={false}
                 movie={state.movies.find((m) => {
                   return m.id == match.params.movieId;
@@ -102,7 +145,12 @@ class App extends Component {
             path="/users/:name"
             exact
             render={({ match }) => (
-              <User state={state} username={match.params.name} />
+              <User
+                rentOrReturn={this.rentOrReturnMovie}
+                logOut={this.logOut}
+                state={state}
+                username={match.params.name}
+              />
             )}
           />
           {/* Routes go here ^ */}
