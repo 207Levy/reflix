@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Catalog from "./components/Catalog";
 import Movie from "./components/Movie";
 import User from "./components/User";
+import { constants } from "./components/constants";
 
 class App extends Component {
   constructor() {
@@ -53,9 +55,24 @@ class App extends Component {
         },
       ],
       users: [
-        { name: "Or", budget: 1000, moviesPossesed: [] },
-        { name: "Raz", budget: 1000, moviesPossesed: [] },
-        { name: "Gal", budget: 1000, moviesPossesed: [1, 3] },
+        {
+          name: "Or",
+          budget: 1000,
+          moviesPossesed: [],
+          img: constants.AVATARS[1],
+        },
+        {
+          name: "Raz",
+          budget: 1000,
+          moviesPossesed: [],
+          img: constants.AVATARS[1],
+        },
+        {
+          name: "Gal",
+          budget: 1000,
+          moviesPossesed: [1, 3],
+          img: constants.AVATARS[1],
+        },
       ],
       loggedOn: null,
     };
@@ -99,12 +116,16 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="header">
-            <div id="main-links">
+            <span id="main-links">
               {/* Main Links */}
-              <Link to="/">Home</Link>
-              <Link to="/catalog">catalog</Link>
-            </div>
-            <div className="logo">Reflix</div>
+              <Link className="link" to="/">
+                Home{" "}
+              </Link>
+              <Link className="link" to="/catalog">
+                catalog{" "}
+              </Link>
+            </span>
+            <span className="logo">Reflix</span>
           </div>
 
           {/* Routes go here v */}
@@ -114,6 +135,7 @@ class App extends Component {
             render={() => (
               <Home
                 state={state}
+                updateInput={this.updateInput}
                 logIn={this.logIn}
                 logOut={this.logOut}
                 addNewUser={this.addNewUser}
@@ -146,6 +168,7 @@ class App extends Component {
             exact
             render={({ match }) => (
               <User
+                updateInput={this.updateInput}
                 rentOrReturn={this.rentOrReturnMovie}
                 logOut={this.logOut}
                 state={state}

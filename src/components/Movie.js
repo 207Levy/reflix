@@ -16,7 +16,11 @@ class Movie extends Component {
 
     if (user === null) {
       if (onlyPic) {
-        return <img src={movie.img} />;
+        return (
+          <div className="movie">
+            <img src={movie.img} />
+          </div>
+        );
       } else {
         return (
           <div className="movie">
@@ -33,11 +37,16 @@ class Movie extends Component {
         ? constants.RETURN
         : constants.RENT;
       if (onlyPic) {
-        return <img src={movie.img} />;
+        return (
+          <div className="movie">
+            <img src={movie.img} />
+          </div>
+        );
       } else {
         return (
           <div className="movie">
             <button
+              className="rent-btn"
               data-name={user.name}
               data-id={movie.id}
               onClick={this.rentOrReturn}

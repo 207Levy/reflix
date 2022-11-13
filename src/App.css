@@ -2,37 +2,171 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-image: url("bg1.webp");
+  background-size: cover;
+  z-index: -1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.link:hover {
+  color: rgba(250, 235, 215, 0.7);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.header {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  font-size: 220%;
+  background-color: rgba(245, 229, 206, 0.703);
+}
+
+#main-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10%;
+}
+
+.header > a {
+  color: rebeccapurple;
+}
+
+.logo {
+  color: red;
+  display: grid;
+  justify-content: end;
+}
+
+.home {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-template-areas:
+    ". w l"
+    "u u u";
+  color: red;
   align-items: center;
+}
+
+#home-title {
+  grid-area: w;
+}
+#logs {
+  grid-area: l;
+}
+
+.user-info {
+  background-color: rgba(222, 184, 135, 0.626);
+  width: fit-content;
+  border-radius: 5px;
+  font-size: larger;
+}
+.log-out {
+  background-color: aquamarine;
+  border-radius: 5px;
+}
+
+#users-container {
+  grid-area: u;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.user-link {
+  display: grid;
+  grid-auto-flow: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 1rem;
 }
 
-.App-link {
-  color: #61dafb;
+.username {
+  color: purple;
+  font-size: xx-large;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+* {
+  text-decoration: none;
+  font-family: "Cinzel Decorative";
+}
+
+#movie-input{
+  font-size: x-large;
+  border-radius: 10px;
+}
+
+.movies {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 3rem;
+}
+
+.link-and-btn {
+  position: relative;
+  width: min-content;
+}
+
+.movie-link {
+  position: relative;
+  width: min-content;
+}
+
+.rent-btn {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  background-color: antiquewhite;
+  font-size: larger;
+  display: inline-block;
+}
+
+.rent-btn:hover {
+  background-color: rgba(250, 235, 215, 0.581);
+  transition: all 1s ease;
+  transform: scale(2);
+}
+
+.rent-btn:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+}
+
+.movie {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.424);
+  color: antiquewhite;
+  font-size: 220%;
+}
+
+.movie > .rent-btn {
+  right: 40.5%;
+  top: 12%;
+}
+
+.movies > .movie {
+  color: antiquewhite;
+  font-size: 220%;
+}
+
+img {
+  width: 20rem;
+  box-shadow: 5px 10px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.user {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+
+.rent-title {
+  color: red;
+  font-size: 220%;
+}
+
+.cat-title {
+  color: red;
+  font-size: 220%;
 }

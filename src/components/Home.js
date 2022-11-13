@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import UserInfo from "../UserInfo";
-
 class Home extends Component {
   logIn = (event) => {
     const userName = event.currentTarget.id;
@@ -14,7 +13,7 @@ class Home extends Component {
     return (
       <div className="home">
         <h1 id="home-title">Who's watching?</h1>
-        <div className="logs">
+        <div id="logs">
           {userLogged !== null ? (
             <UserInfo logOut={this.props.logOut} user={userLogged} />
           ) : (
@@ -25,12 +24,16 @@ class Home extends Component {
           {this.props.state.users.map((u) => {
             return (
               <Link
+                style={{
+                  textDecoration: "none",
+                }}
                 onClick={this.logIn}
                 className="user-link"
                 id={u.name}
                 to={`/users/${u.name}`}
               >
-                <div className="username">{u.name}</div>
+                <img src={u.img} />
+                <span className="username">{u.name} </span>
               </Link>
             );
           })}

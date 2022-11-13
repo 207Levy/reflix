@@ -11,7 +11,7 @@ export class UserInfo extends Component {
       <div className="user-info">
         <div>{user.name}</div>
         <div>{user.budget}$</div>
-        <Link to={"/"} onClick={this.logOut}>
+        <Link className="log-out" to={"/"} onClick={this.logOut}>
           Log-out
         </Link>
       </div>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { constants } from "./constants";
 import Movie from "./Movie";
+import "./movies.css";
 
 class Movies extends Component {
   rentOrReturn = (event) => {
@@ -40,8 +41,9 @@ class Movies extends Component {
             ? constants.RETURN
             : constants.RENT;
           return (
-            <div>
+            <div className="link-and-btn">
               <button
+                className="rent-btn"
                 data-name={user.name}
                 data-id={m.id}
                 onClick={this.rentOrReturn}
