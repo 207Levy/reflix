@@ -59,7 +59,7 @@ class App extends Component {
           name: "Or",
           budget: 1000,
           moviesPossesed: [],
-          img: constants.AVATARS[1],
+          img: constants.AVATARS[2],
         },
         {
           name: "Raz",
@@ -71,7 +71,7 @@ class App extends Component {
           name: "Gal",
           budget: 1000,
           moviesPossesed: [1, 3],
-          img: constants.AVATARS[1],
+          img: constants.AVATARS[3],
         },
       ],
       loggedOn: null,
@@ -86,6 +86,7 @@ class App extends Component {
   logOut = () => {
     this.setState({ loggedOn: null });
   };
+  
   rentOrReturnMovie = (userName, movieId) => {
     movieId = Number.parseInt(movieId);
     const usersDup = this.state.users.map((user) => {
@@ -128,7 +129,6 @@ class App extends Component {
             <span className="logo">Reflix</span>
           </div>
 
-          {/* Routes go here v */}
           <Route
             exact
             path="/"

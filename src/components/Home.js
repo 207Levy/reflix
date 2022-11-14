@@ -24,9 +24,6 @@ class Home extends Component {
           {this.props.state.users.map((u) => {
             return (
               <Link
-                style={{
-                  textDecoration: "none",
-                }}
                 onClick={this.logIn}
                 className="user-link"
                 id={u.name}

@@ -3,7 +3,7 @@
 }
 
 body {
-  background-image: url("bg1.webp");
+  background-image: url("resources/bg1.webp");
   background-size: cover;
   z-index: -1;
 }
@@ -53,14 +53,52 @@ body {
 }
 
 .user-info {
-  background-color: rgba(222, 184, 135, 0.626);
-  width: fit-content;
+  display: grid;
+  grid-template-areas:
+    "n l"
+    "b l";
+  width: 80%;
+  justify-content: center;
   border-radius: 5px;
-  font-size: larger;
+  font-size: 150%;
 }
+
 .log-out {
-  background-color: aquamarine;
+  grid-area: l;
   border-radius: 5px;
+  text-decoration: none;
+  float: right;
+  transition: width 0.35s;
+  -webkit-transition: width 0.35s;
+  overflow: hidden;
+}
+.info-img {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.out {
+  font-family: "Oswald", sans-serif;
+  position: relative;
+  /* right: -18px; */
+  /* bottom: -4px; */
+  overflow: hidden;
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity 0.45s;
+  -webkit-transition: opacity 0.35s;
+}
+
+.log-out:hover .out {
+  opacity: 0.9;
+}
+
+.name {
+  grid-area: n;
+}
+
+.balance {
+  grid-area: b;
 }
 
 #users-container {
@@ -86,7 +124,7 @@ body {
   font-family: "Cinzel Decorative";
 }
 
-#movie-input{
+#movie-input {
   font-size: x-large;
   border-radius: 10px;
 }

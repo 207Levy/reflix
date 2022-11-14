@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import Search from "../Search";
 import UserInfo from "../UserInfo";
-import Catalog from "./Catalog";
+
 import Movies from "./Movies";
 
 export class User extends Component {
-
-  constructor(){
+  constructor(props) {
+    super(props);
+    const user = this.getUserByName(this.props.username);
+    let rented = this.getRentedMoviesByUser(user);
     this.state = {
-      rentedFiltered: [],
-      allFiltered: []
-    }
+      rentedFiltered: rented,
+      allFiltered: this.props.state.movies
+    };
   }
 
   getRentedMoviesByUser = (user) => {
@@ -26,14 +28,15 @@ export class User extends Component {
     });
 
   filterMovies = (filtered) => {
-    const user = this.getUserByName(this.props.username)
-    let rented = this.getRentedMoviesByUser(user)
-    rented = rented.filter( r => filtered.includes(r))
-    this.setState({rentedFiltered: rented, allFiltered: filtered})
-  }
+    const user = this.getUserByName(this.props.username);
+    let rented = this.getRentedMoviesByUser(user);
+    rented = rented.filter((r) => filtered.includes(r));
+    this.setState({ rentedFiltered: rented, allFiltered: filtered });
+  };
 
   render() {
     const user = this.getUserByName();
+    
     const rentedMovies = this.getRentedMoviesByUser(user);
     return (
       <div className="user">
@@ -43,7 +46,7 @@ export class User extends Component {
           <p className="rent-title">Rented:</p>
           <Movies
             rentOrReturn={this.props.rentOrReturn}
-            movies={rentedMovies}
+            movies={this.state.rentedFiltered}
             user={user}
           />
         </div>
@@ -51,7 +54,7 @@ export class User extends Component {
           <p className="cat-title">Catalog:</p>
           <Movies
             rentOrReturn={this.props.rentOrReturn}
-            movies={this.props.state.movies}
+            movies={this.state.allFiltered}
             user={user}
           />
         </div>

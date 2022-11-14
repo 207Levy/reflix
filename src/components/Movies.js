@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { constants } from "./constants";
 import Movie from "./Movie";
-import "./movies.css";
 
 class Movies extends Component {
   rentOrReturn = (event) => {

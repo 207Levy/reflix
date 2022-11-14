@@ -5,8 +5,9 @@ import Movies from "./Movies";
 
 class Catalog extends Component {
   constructor() {
+    super();
     this.state = {
-      allFiltered: this.p,
+      allFiltered: [],
     };
   }
   filterMovies = (filtered) => {
@@ -18,7 +19,7 @@ class Catalog extends Component {
         <Search state={this.props.state} filterMovies={this.filterMovies} />
         <Movies
           rentOrReturn={this.props.rentOrReturn}
-          movies={this.props.state.movies}
+          movies={this.state.allFiltered}
           user={this.props.state.loggedOn}
         />
       </div>

@@ -8,19 +8,24 @@ export class Search extends Component {
     };
   }
 
-  fiterMovies = () =>{
-    const filtered = this.props.state.movies.filter( m => m.title.includes(this.state.searchFor))
-    this.props.filterMovies(filtered)
-  }
+  filterMovies = () => {
+    const filtered = this.props.state.movies.filter((m) =>
+      m.title.includes(this.state.searchFor)
+    );
+    this.props.filterMovies(filtered);
+  };
+
   updateInput = (event) => {
     const value = event.target.value;
-    this.setState({ searchFor: value }, this.filterMovies());
+    this.setState({ searchFor: value }, function () {
+      this.filterMovies();
+    });
   };
   render() {
     return (
       <div className="search">
         <input
-          value={this.state.searchBar}
+          value={this.state.searchFor}
           onChange={this.updateInput}
           id="movie-input"
           placeholder="Search for movies..."
