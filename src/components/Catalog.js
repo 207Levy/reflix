@@ -4,19 +4,24 @@ import Search from "../Search";
 import Movies from "./Movies";
 
 class Catalog extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      allFiltered: [],
+      allFiltered: this.props.state.movies,
+      searchFor: "",
     };
   }
-  filterMovies = (filtered) => {
-    this.setState({ allFiltered: filtered });
+  filterMovies = (filtered, input) => {
+    this.setState({ allFiltered: filtered, searchFor: input });
   };
   render() {
     return (
       <div>
-        <Search state={this.props.state} filterMovies={this.filterMovies} />
+        <Search
+          state={this.props.state}
+          filterMovies={this.filterMovies}
+          searchFor={this.state.searchFor}
+        />
         <Movies
           rentOrReturn={this.props.rentOrReturn}
           movies={this.state.allFiltered}

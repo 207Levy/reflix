@@ -1,31 +1,23 @@
 import React, { Component } from "react";
 
 export class Search extends Component {
-  constructor() {
-    super();
-    this.state = {
-      searchFor: "",
-    };
-  }
 
-  filterMovies = () => {
+  filterMovies = (input) => {
     const filtered = this.props.state.movies.filter((m) =>
-      m.title.includes(this.state.searchFor)
+      m.title.toLowerCase().includes(input.toLowerCase())
     );
-    this.props.filterMovies(filtered);
+    this.props.filterMovies(filtered, input);
   };
 
   updateInput = (event) => {
     const value = event.target.value;
-    this.setState({ searchFor: value }, function () {
-      this.filterMovies();
-    });
+    this.filterMovies(value);
   };
   render() {
     return (
       <div className="search">
         <input
-          value={this.state.searchFor}
+          value={this.props.searchFor}
           onChange={this.updateInput}
           id="movie-input"
           placeholder="Search for movies..."

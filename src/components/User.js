@@ -11,7 +11,8 @@ export class User extends Component {
     let rented = this.getRentedMoviesByUser(user);
     this.state = {
       rentedFiltered: rented,
-      allFiltered: this.props.state.movies
+      allFiltered: this.props.state.movies,
+      searchFor: "",
     };
   }
 
@@ -27,21 +28,29 @@ export class User extends Component {
       return u.name === this.props.username;
     });
 
-  filterMovies = (filtered) => {
+  
+  filterMovies = (filtered, input) => {
     const user = this.getUserByName(this.props.username);
     let rented = this.getRentedMoviesByUser(user);
     rented = rented.filter((r) => filtered.includes(r));
-    this.setState({ rentedFiltered: rented, allFiltered: filtered });
+    this.setState({
+      rentedFiltered: rented,
+      allFiltered: filtered,
+      searchFor: input,
+    });
   };
 
   render() {
     const user = this.getUserByName();
-    
-    const rentedMovies = this.getRentedMoviesByUser(user);
+
     return (
       <div className="user">
         <UserInfo logOut={this.props.logOut} user={user} />
-        <Search state={this.props.state} filterMovies={this.filterMovies} />
+        <Search
+          state={this.props.state}
+          filterMovies={this.filterMovies}
+          searchFor={this.state.searchFor}
+        />
         <div className="rented-container">
           <p className="rent-title">Rented:</p>
           <Movies

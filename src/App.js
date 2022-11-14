@@ -86,7 +86,7 @@ class App extends Component {
   logOut = () => {
     this.setState({ loggedOn: null });
   };
-  
+
   rentOrReturnMovie = (userName, movieId) => {
     movieId = Number.parseInt(movieId);
     const usersDup = this.state.users.map((user) => {
@@ -135,7 +135,6 @@ class App extends Component {
             render={() => (
               <Home
                 state={state}
-                updateInput={this.updateInput}
                 logIn={this.logIn}
                 logOut={this.logOut}
                 addNewUser={this.addNewUser}
@@ -168,7 +167,6 @@ class App extends Component {
             exact
             render={({ match }) => (
               <User
-                updateInput={this.updateInput}
                 rentOrReturn={this.rentOrReturnMovie}
                 logOut={this.logOut}
                 state={state}
